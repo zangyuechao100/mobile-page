@@ -4,7 +4,7 @@
       <component-list></component-list>
     </div>
     <div class="main-center">
-
+      <view-wrapper></view-wrapper>
     </div>
     <div class="main-right">
 
@@ -13,11 +13,13 @@
 </template>
 
 <script>
+import ViewWrapper from './../viewWrapper'
 import ComponentList from './../componentList'
 export default {
   name: 'Main',
   components: {
-    ComponentList
+    ComponentList,
+    ViewWrapper
   }
 }
 </script>
@@ -35,6 +37,7 @@ export default {
 
 .main-center {
   flex: 1 0;
+  height: calc(100% - 120px);
 }
 
 .main-right {
