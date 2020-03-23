@@ -9,17 +9,17 @@
     >
       <div v-for="item in myArray" :key="item.id" class="item">
         {{item.name}}
-        <!-- <draggable
+        <draggable
           :group="{ name: 'g1' }"
           v-model="item.list"
           @start="drag=true"
           v-bind="dragOptions"
           @end="drag=false"
         >
-          <div v-for="child in item.list" :key="child.id" class="item">
+          <div v-for="child in item.child" :key="child.id" class="item">
             {{child.name}}
           </div>
-        </draggable> -->
+        </draggable>
       </div>
     </draggable>
   </div>
@@ -47,20 +47,13 @@ export default {
         {
           id: 1,
           name: '测试1',
-          list: [
-            {
-              id: 11,
-              name: '测试11'
-            }, {
-              id: 12,
-              name: '测试12'
-            }
+          child: [
           ]
         },
         {
           id: 2,
           name: '测试2',
-          list: [
+          child: [
             {
               id: 21,
               name: '测试21'
@@ -73,7 +66,7 @@ export default {
         {
           id: 3,
           name: '测试3',
-          list: [
+          child: [
             {
               id: 31,
               name: '测试31'
@@ -86,7 +79,7 @@ export default {
         {
           id: 4,
           name: '测试4',
-          list: [
+          child: [
             {
               id: 41,
               name: '测试41'

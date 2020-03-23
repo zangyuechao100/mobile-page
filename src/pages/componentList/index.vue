@@ -34,7 +34,12 @@ export default {
         components
       }
       if (container) {
-        component.child = []
+        component.child = [
+          {
+            name: '单列图片',
+            components: 'm-area-image'
+          }
+        ]
       }
       this.$emit('addComponent', component)
     }

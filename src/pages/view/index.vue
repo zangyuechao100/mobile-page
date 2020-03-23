@@ -1,45 +1,20 @@
 <template>
-  <div class="view-wrapper" ref="viewWrapper">
-    <draggable
-      v-model="config"
-      v-bind="dragOptions"
-      @start="drag=true"
-      @end="drag=false"
-    >
-      <template
-        v-for="(item, index) in config"
-      >
-        <component
-          :is="item.components"
-          :key="index"
-          class="edit"
-        >
-          <view-content v-if="item.child" :config="item.child"></view-content>
-        </component>
-      </template>
-    </draggable>
+  <div class="view-wrapper">
+    <deep-item :config="config"></deep-item>
   </div>
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
+import DeepItem from './deepItem'
 export default {
   name: 'ViewContent',
-  components: {
-    Draggable
-  },
   data () {
     return {
       config: []
     }
   },
-  computed: {
-    dragOptions () {
-      return {
-        animation: 200,
-        group: 'component'
-      }
-    }
+  components: {
+    DeepItem
   },
   mounted () {
     this.bindIframeMessage()

@@ -25,6 +25,6 @@ export default [
     name: '容器',
     image: container,
     components: 'm-area-wrap',
-    container: false
+    container: true
   }
 ]

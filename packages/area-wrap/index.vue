@@ -1,6 +1,9 @@
 <template>
   <div class="area-wrap">
     <area-title></area-title>
+    <div class="area-wrap--item">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
