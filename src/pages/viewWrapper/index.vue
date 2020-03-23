@@ -1,41 +1,46 @@
 <template>
   <div class="view-wrapper">
-    <button @click="aaa">111111</button>
     <div class="phone">
-      <div class="header"></div>
-      <div class="title">可视化拖动</div>
+      <div class="header" />
+      <div class="title">
+        可视化拖动
+      </div>
       <div class="content">
-        <component :is="componentA"></component>
+        <iframe
+          ref="iFrame"
+          class="content-iframe"
+          :src="src"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AreaTitle from './../../../packages/area-title'
-import AreaImage from './../../../packages/area-image'
+// import AreaTitle from "./../../../packages/area-title";
+// import AreaImage from "./../../../packages/area-image";
 export default {
-  name: 'ViewWrapper',
+  name: "ViewWrapper",
   components: {
-    AreaTitle,
-    AreaImage
+ 
   },
-  data(){
-    return{
-      componentA:AreaTitle
-    }
-  },
-  methods:{
-    aaa(){
-      this.componentA = AreaImage
-    }
+  data() {
+    return {};
   },
   computed: {
-    componentAq () {
-      return AreaTitle
+    src () {
+      return `//${window.location.hostname}:${window.location.port}/view`
+    }
+  },
+  methods: {
+    pushMsg (data) {
+      this.$refs.iFrame.contentWindow.postMessage({
+        type: 'ADD_COMPONENT',
+        data
+      }, '*')
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -45,7 +50,7 @@ export default {
   box-sizing: border-box;
 }
 .phone {
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
   width: 375px;
   height: 670px;
   margin: 120px 0 0;
@@ -53,7 +58,7 @@ export default {
 .phone .header {
   width: 100%;
   height: 20px;
-  background: url('./../../assets/phone_status_bar.png') no-repeat;
+  background: url("./../../assets/phone_status_bar.png") no-repeat;
 }
 
 .title {
@@ -66,5 +71,10 @@ export default {
 }
 .content {
   width: 100%;
+  height: calc(100% - 64px);
+}
+.content-iframe {
+  width: 100%;
+  height: 100%;
 }
 </style>

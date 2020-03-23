@@ -1,14 +1,12 @@
 <template>
   <div class="main-wrapper">
     <div class="main-left">
-      <component-list></component-list>
+      <component-list @addComponent="addComponent" />
     </div>
     <div class="main-center">
-      <view-wrapper></view-wrapper>
+      <view-wrapper ref="viewWrapper" />
     </div>
-    <div class="main-right">
-
-    </div>
+    <div class="main-right" />
   </div>
 </template>
 
@@ -20,6 +18,11 @@ export default {
   components: {
     ComponentList,
     ViewWrapper
+  },
+  methods: {
+    addComponent (item) {
+      this.$refs.viewWrapper.pushMsg(item)
+    }
   }
 }
 </script>
