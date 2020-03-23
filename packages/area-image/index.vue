@@ -1,6 +1,6 @@
 <template>
   <div class="area-image">
-    12212
+    <img src="./../../src/assets/emty_img.png" alt="">
   </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.area-image {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>

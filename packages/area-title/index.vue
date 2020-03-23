@@ -15,7 +15,7 @@ export default {
 
 <style scoped>
 .area-title {
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   position: relative;
 }

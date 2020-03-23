@@ -1,8 +1,7 @@
 <template>
-  <div class="view-wrapper">
+  <div class="view-wrapper" ref="viewWrapper">
     <draggable
       v-model="config"
-      group="people"
       v-bind="dragOptions"
       @start="drag=true"
       @end="drag=false"
@@ -14,14 +13,16 @@
           :is="item.components"
           :key="index"
           class="edit"
-        />
+        >
+          <view-content v-if="item.child" :config="item.child"></view-content>
+        </component>
       </template>
     </draggable>
   </div>
 </template>
 
 <script>
-import Draggable from 'vuedraggable';
+import Draggable from 'vuedraggable'
 export default {
   name: 'ViewContent',
   components: {
@@ -29,31 +30,14 @@ export default {
   },
   data () {
     return {
-      config: [],
-      myArray: [
-        {
-          id: 1,
-          name: '测试1'
-        },
-        {
-          id: 2,
-          name: '测试2'
-        },
-        {
-          id: 3,
-          name: '测试3'
-        },
-        {
-          id: 4,
-          name: '测试4'
-        }
-      ]
+      config: []
     }
   },
   computed: {
     dragOptions () {
       return {
-        animation: 200
+        animation: 200,
+        group: 'component'
       }
     }
   },
@@ -67,7 +51,14 @@ export default {
         switch (data.type) {
           case 'ADD_COMPONENT':
             this.config.push(data.data)
-            console.log(this.config)
+            this.$nextTick(() => {
+              let div1 = document.querySelector('.view-wrapper > div')
+              div1.scrollIntoView({
+                behavior: 'smooth',
+                block: 'end',
+                inline: 'end'
+              })
+            })
             break
         }
       })
@@ -76,8 +67,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .edit {
-  
+  border: 1px dashed #29b6b0;
+  &:not(:last-of-type) {
+    border-bottom: none;
+  }
+}
+
+.view-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 </style>

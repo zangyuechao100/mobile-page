@@ -19,24 +19,27 @@
 </template>
 
 <script>
-import list from "./../../../packages/index";
+import list from './../../../packages/index'
 export default {
-  name: "ComponentList",
-  data() {
+  name: 'ComponentList',
+  data () {
     return {
       componentsList: list
-    };
+    }
   },
   methods: {
-    addComponent ({ name, components }) {
+    addComponent ({ name, components, container }) {
       let component = {
         name,
         components
       }
+      if (container) {
+        component.child = []
+      }
       this.$emit('addComponent', component)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">
@@ -46,7 +49,6 @@ export default {
 }
 .component-show {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -74,6 +76,5 @@ export default {
   background: #f5fbfb;
   cursor: pointer;
 }
-
 
 </style>

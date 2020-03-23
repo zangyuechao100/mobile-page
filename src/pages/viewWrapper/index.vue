@@ -17,15 +17,13 @@
 </template>
 
 <script>
-// import AreaTitle from "./../../../packages/area-title";
-// import AreaImage from "./../../../packages/area-image";
 export default {
-  name: "ViewWrapper",
+  name: 'ViewWrapper',
   components: {
- 
+
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   computed: {
     src () {
@@ -40,7 +38,7 @@ export default {
       }, '*')
     }
   }
-};
+}
 </script>
 
 <style scoped>
