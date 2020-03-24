@@ -2,14 +2,22 @@
   <div class="area-title">
     <div class="title-text">
       <div class="line"></div>
-      <div class="title">这是标题</div>
+      <div class="title">{{title}}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AreaTitle'
+  name: 'AreaTitle',
+  props: {
+    title: {
+      type: String,
+      default: () => {
+        return '标题'
+      }
+    }
+  }
 }
 </script>
 

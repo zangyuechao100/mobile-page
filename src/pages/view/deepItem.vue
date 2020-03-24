@@ -12,9 +12,14 @@
       v-for="(item, index) in list"
     >
       <component
+        v-bind="item.props"
         :is="item.components"
         :key="index"
         class="edit"
+        @click.native.stop="getCurrentIndex(index)"
+        :class="{
+          'active': currentIndex === index
+        }"
       >
         <deep-item v-if="item.child" :list="item.child"></deep-item>
       </component>
@@ -32,6 +37,7 @@ export default {
   props: ['list'],
   data () {
     return {
+      currentIndex: ''
     }
   },
   computed: {
@@ -47,6 +53,9 @@ export default {
   },
   methods: {
     handleItemEnd (e) {
+    },
+    getCurrentIndex (index) {
+      this.currentIndex = index
     }
   },
   watch: {
@@ -60,6 +69,9 @@ export default {
   border: 1px dashed #29b6b0;
   &:not(:last-of-type) {
     border-bottom: none;
+  }
+  &.active {
+    border: 1px dashed #e93030;
   }
 }
 
