@@ -1,20 +1,22 @@
 <template>
   <draggable
-    v-model="copyConfig"
+    :list="list"
+    class="dragAreaEdit"
     v-bind="dragOptions"
     :group="{ name: 'g1' }"
     @start="drag=true"
     @end="drag=false"
+    @newIndex="handleItemEnd"
   >
     <template
-      v-for="(item, index) in copyConfig"
+      v-for="(item, index) in list"
     >
       <component
         :is="item.components"
         :key="index"
         class="edit"
       >
-        <deep-item v-if="item.child" :config="item.child"></deep-item>
+        <deep-item v-if="item.child" :list="item.child"></deep-item>
       </component>
     </template>
   </draggable>
@@ -27,38 +29,33 @@ export default {
   components: {
     Draggable
   },
-  props: ['config'],
+  props: ['list'],
   data () {
     return {
-      copyConfig: []
     }
   },
   computed: {
     dragOptions () {
       return {
         animation: 200,
-        group: 'component'
+        group: 'description',
+        ghostClass: 'ghost'
       }
     }
   },
   mounted () {
   },
   methods: {
+    handleItemEnd (e) {
+    }
   },
   watch: {
-    config: {
-      handler: function (val) {
-        console.log(val)
-        this.copyConfig = val.slice()
-      },
-      immediate: true,
-      deep: true
-    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+
 .edit {
   border: 1px dashed #29b6b0;
   &:not(:last-of-type) {
@@ -70,5 +67,19 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+}
+
+.dragAreaEdit {
+  &:after {
+    content: '可拖入组件';
+    display: block;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    box-sizing: border-box;
+    border: 1px dashed #ddd;
+    flex: 0 0 100%;
+  }
 }
 </style>

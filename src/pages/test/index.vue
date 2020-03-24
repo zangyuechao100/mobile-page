@@ -1,7 +1,7 @@
 <template>
   <div class="test">
     <draggable
-      v-model="myArray"
+      :list="myArray"
       @start="drag=true"
       v-bind="dragOptions"
       :group="{ name: 'g1' }"
@@ -11,7 +11,7 @@
         {{item.name}}
         <draggable
           :group="{ name: 'g1' }"
-          v-model="item.list"
+          :list="item.list"
           @start="drag=true"
           v-bind="dragOptions"
           @end="drag=false"
@@ -46,9 +46,8 @@ export default {
       myArray: [
         {
           id: 1,
-          name: '测试1',
-          child: [
-          ]
+          name: '测试1'
+
         },
         {
           id: 2,

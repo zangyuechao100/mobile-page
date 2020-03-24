@@ -1,6 +1,6 @@
 <template>
   <div class="view-wrapper">
-    <deep-item :config="config"></deep-item>
+    <deep-item :list="config"></deep-item>
   </div>
 </template>
 
@@ -54,5 +54,8 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+}
+.view-wrapper > .dragAreaEdit::after {
+  visibility: hidden;
 }
 </style>
