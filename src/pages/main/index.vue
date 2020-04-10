@@ -19,10 +19,26 @@ export default {
     ComponentList,
     ViewWrapper
   },
+  data () {
+    return {
+      currentIndex: ''
+    }
+  },
   methods: {
     addComponent (item) {
       this.$refs.viewWrapper.pushMsg(item)
+    },
+    bindIframeMessage () {
+      window.addEventListener('message', ({ data }) => {
+        switch (data.type) {
+          case 'SELECT_COMPONENT':
+            this.currentIndex = data.data.index
+        }
+      })
     }
+  },
+  mounted () {
+    this.bindIframeMessage()
   }
 }
 </script>

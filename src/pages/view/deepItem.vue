@@ -12,16 +12,17 @@
       v-for="(item, index) in list"
     >
       <component
+        :ref="'item-'+initComponentKey(index)"
         v-bind="item.props"
         :is="item.components"
         :key="index"
         class="edit"
-        @click.native.stop="getCurrentIndex(index)"
         :class="{
-          'active': currentIndex === index
+          'active': currentIndex === initComponentKey(index)
         }"
+        @click.native.stop="getCurrentIndex(initComponentKey(index))"
       >
-        <deep-item v-if="item.child" :list="item.child"></deep-item>
+        <deep-item v-if="item.child" :currentIndex="currentIndex" :selectComponent="selectComponent" :list="item.child" :preKey="initComponentKey(index)"></deep-item>
       </component>
     </template>
   </draggable>
@@ -34,10 +35,31 @@ export default {
   components: {
     Draggable
   },
-  props: ['list'],
+  props: {
+    list: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    preKey: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    currentIndex: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    selectComponent: {
+      type: Function
+    }
+  },
   data () {
     return {
-      currentIndex: ''
     }
   },
   computed: {
@@ -55,10 +77,16 @@ export default {
     handleItemEnd (e) {
     },
     getCurrentIndex (index) {
-      this.currentIndex = index
+      this.selectComponent(index)
+    },
+    initComponentKey (index) {
+      return this.preKey ? `${this.preKey}-${index}` : index + ''
     }
   },
   watch: {
+    currentIndex (val) {
+      console.log(val)
+    }
   }
 }
 </script>

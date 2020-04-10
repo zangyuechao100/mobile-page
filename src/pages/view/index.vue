@@ -1,6 +1,6 @@
 <template>
   <div class="view-wrapper">
-    <deep-item :list="config"></deep-item>
+    <deep-item :currentIndex="currentIndex" :list="config" :selectComponent="selectComponent"></deep-item>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ export default {
   name: 'ViewContent',
   data () {
     return {
-      config: []
+      config: [],
+      currentIndex: ''
     }
   },
   components: {
@@ -37,6 +38,15 @@ export default {
             break
         }
       })
+    },
+    selectComponent (index) {
+      this.currentIndex = index
+      window.parent.postMessage({
+        type: 'SELECT_COMPONENT',
+        data: {
+          index: index
+        }
+      }, '*')
     }
   }
 }
