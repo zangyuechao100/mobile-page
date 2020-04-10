@@ -45,6 +45,7 @@ export default {
     selectComponent (index, props) {
       this.currentIndex = index
       this.deepChangeProps(props)
+      console.log(this.config)
       window.parent.postMessage({
         type: 'SELECT_COMPONENT',
         data: {
@@ -61,13 +62,15 @@ export default {
         if (index > 0) {
           nowItem = nowItem.child[value]
         } else {
-          // nowItem = nowItem[value]
-          this.$set(this.config[indexArr[0]], 'props', props)
+          nowItem = nowItem[value]
+          // this.$set(this.config[indexArr[0]], 'props', props)
         }
         index++
       }
-
       nowItem.props = props
+      let copyObj = JSON.parse(JSON.stringify(this.config))
+      console.log(copyObj)
+      this.config = copyObj
     }
   }
 }
