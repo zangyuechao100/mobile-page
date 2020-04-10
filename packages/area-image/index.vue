@@ -1,12 +1,26 @@
 <template>
   <div class="area-image">
-    <img src="./../../src/assets/emty_img.png" alt="">
+    <img :src="src" alt="">
   </div>
 </template>
 
 <script>
+const defaultSrc = require('./../../src/assets/emty_img.png')
 export default {
-  name: 'AreaImage'
+  name: 'AreaImage',
+  props: {
+    src: {
+      type: String,
+      default: defaultSrc
+    }
+  },
+  methods: {
+    getConfig () {
+      return {
+        src: this.src
+      }
+    }
+  }
 }
 </script>
 

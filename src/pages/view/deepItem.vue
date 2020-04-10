@@ -74,10 +74,14 @@ export default {
   mounted () {
   },
   methods: {
+    getComponentConfig () {
+
+    },
     handleItemEnd (e) {
     },
     getCurrentIndex (index) {
-      this.selectComponent(index)
+      let result = this.$refs[`item-${index}`][0].getConfig()
+      this.selectComponent(index, result)
     },
     initComponentKey (index) {
       return this.preKey ? `${this.preKey}-${index}` : index + ''
@@ -85,7 +89,12 @@ export default {
   },
   watch: {
     currentIndex (val) {
-      console.log(val)
+    },
+    list: {
+      handler (val) {
+        console.log(val, 1111)
+      },
+      deep: true
     }
   }
 }

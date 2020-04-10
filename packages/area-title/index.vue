@@ -17,6 +17,13 @@ export default {
         return '标题'
       }
     }
+  },
+  methods: {
+    getConfig () {
+      return {
+        title: this.title
+      }
+    }
   }
 }
 </script>

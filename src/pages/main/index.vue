@@ -6,25 +6,34 @@
     <div class="main-center">
       <view-wrapper ref="viewWrapper" />
     </div>
-    <div class="main-right" />
+    <div class="main-right">
+      <change-props :propsObj="propsObj" @changeInput="changeInput"></change-props>
+    </div>
   </div>
 </template>
 
 <script>
 import ViewWrapper from './../viewWrapper'
 import ComponentList from './../componentList'
+import ChangeProps from './../changeProps'
 export default {
   name: 'Main',
   components: {
     ComponentList,
-    ViewWrapper
+    ViewWrapper,
+    ChangeProps
   },
   data () {
     return {
-      currentIndex: ''
+      currentIndex: '',
+      propsObj: {}
     }
   },
   methods: {
+    changeInput (key, value) {
+      this.propsObj[key] = value
+      this.$refs.viewWrapper.updateProp(this.propsObj)
+    },
     addComponent (item) {
       this.$refs.viewWrapper.pushMsg(item)
     },
@@ -33,6 +42,7 @@ export default {
         switch (data.type) {
           case 'SELECT_COMPONENT':
             this.currentIndex = data.data.index
+            this.propsObj = data.data.props
         }
       })
     }

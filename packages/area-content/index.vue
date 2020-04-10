@@ -5,7 +5,13 @@
 
 <script>
 export default {
-  name: 'AreaContent'
+  name: 'AreaContent',
+  methods: {
+    getConfig () {
+      return {
+      }
+    }
+  }
 }
 </script>
 

@@ -13,6 +13,12 @@
 export default {
   name: 'AreaWrap',
   components: {
+  },
+  methods: {
+    getConfig () {
+      return {
+      }
+    }
   }
 }
 </script>

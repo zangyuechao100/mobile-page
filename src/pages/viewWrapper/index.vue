@@ -36,6 +36,12 @@ export default {
         type: 'ADD_COMPONENT',
         data
       }, '*')
+    },
+    updateProp (data) {
+      this.$refs.iFrame.contentWindow.postMessage({
+        type: 'UPDATE_PROPS',
+        data
+      }, '*')
     }
   }
 }

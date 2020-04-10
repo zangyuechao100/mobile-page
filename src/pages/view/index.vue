@@ -36,17 +36,38 @@ export default {
               })
             })
             break
+          case 'UPDATE_PROPS':
+            this.deepChangeProps(data.data)
+            console.log(this.config, 333)
         }
       })
     },
-    selectComponent (index) {
+    selectComponent (index, props) {
       this.currentIndex = index
+      this.deepChangeProps(props)
       window.parent.postMessage({
         type: 'SELECT_COMPONENT',
         data: {
-          index: index
+          index: index,
+          props
         }
       }, '*')
+    },
+    deepChangeProps (props) {
+      let indexArr = this.currentIndex.split('-')
+      let nowItem = this.config
+      let index = 0
+      for (let value of indexArr) {
+        if (index > 0) {
+          nowItem = nowItem.child[value]
+        } else {
+          // nowItem = nowItem[value]
+          this.$set(this.config[indexArr[0]], 'props', props)
+        }
+        index++
+      }
+
+      nowItem.props = props
     }
   }
 }
